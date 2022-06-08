@@ -9,5 +9,8 @@
 # Install CocoaPods using Homebrew.
 brew install cocoapods
 
+# Install SwiftGen using Homebrew.
+brew install swiftgen
+
 # Install dependencies you manage with CocoaPods.
 pod install
