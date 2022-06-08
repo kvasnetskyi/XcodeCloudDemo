@@ -1,0 +1,15 @@
+//
+//  Config-DEV.xcconfig
+//  XcodeCloudDemo
+//
+//  Created by Artem Kvasnetcky on 24.05.2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Pods/Target Support Files/Pods-XcodeCloudDemo/Pods-XcodeCloudDemo.release dev.xcconfig"
+
+APP_ENVIRONMENT = dev
+APP_NAME = XcodeCloudDemo DEV
+APP_BUNDLE_ID = com.artem.kvasnetskyi.XcodeCloudDemo.dev

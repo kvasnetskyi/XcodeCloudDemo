@@ -1,0 +1,15 @@
+//
+//  Config-STG.xcconfig
+//  XcodeCloudDemo
+//
+//  Created by Artem Kvasnetcky on 24.05.2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Pods/Target Support Files/Pods-XcodeCloudDemo/Pods-XcodeCloudDemo.release stg.xcconfig"
+
+APP_ENVIRONMENT = stg
+APP_NAME = XcodeCloudDemo STG
+APP_BUNDLE_ID = com.artem.kvasnetskyi.XcodeCloudDemo.stg
