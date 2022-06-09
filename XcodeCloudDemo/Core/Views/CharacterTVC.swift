@@ -34,6 +34,7 @@ class CharacterTVC: UITableViewCell {
     }
     
     func commonInit() {
+        backgroundColor = .white
         let labelsStack = UIStackView()
         labelsStack.setup(axis: .vertical, spacing: 5)
         
@@ -41,6 +42,8 @@ class CharacterTVC: UITableViewCell {
         statusLabel.textColor = .lightGray
         
         nameLabel.font = UIFont.systemFont(ofSize: 21, weight: .bold)
+        
+        nameLabel.textColor = .black
         
         speciesLabel.font = UIFont.systemFont(ofSize: 16)
         speciesLabel.textColor = .gray
