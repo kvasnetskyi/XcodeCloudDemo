@@ -11,9 +11,11 @@ import CombineCocoa
 import KeyboardLayoutGuide
 
 class BaseViewController<VM: ViewModel>: UIViewController {
+    // MARK: - Properties
     var viewModel: VM
-    var cancellables = Set<AnyCancellable>()
+    var subscriptions = Set<AnyCancellable>()
 
+    // MARK: - Init
     init(viewModel: VM) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -22,25 +24,40 @@ class BaseViewController<VM: ViewModel>: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    deinit {
+        debugPrint("deinit of ", String(describing: self))
+    }
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         viewModel.onViewDidLoad()
 
         viewModel.isLoadingPublisher
             .sink { [weak self] isLoading in
                 isLoading ? self?.showLoadingView() : self?.hideLoadingView()
             }
-            .store(in: &cancellables)
+            .store(in: &subscriptions)
 
         viewModel.errorPublisher
             .sink { [weak self] error in
-                let alertController = UIAlertController(title: Localization.error, message: error.localizedDescription, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: Localization.ok, style: .default, handler: nil)
+                let alertController = UIAlertController(
+                    title: Localization.error,
+                    message: error.localizedDescription,
+                    preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(
+                    title: Localization.ok, style: .default, handler: nil
+                )
+                
                 alertController.addAction(okAction)
+                
                 self?.present(alertController, animated: true, completion: nil)
             }
-            .store(in: &cancellables)
+            .store(in: &subscriptions)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,16 +80,17 @@ class BaseViewController<VM: ViewModel>: UIViewController {
         viewModel.onViewDidDisappear()
     }
     
-    deinit {
-        debugPrint("deinit of ", String(describing: self))
-    }
-
+    // MARK: - Methods
     func showLoadingView() {
         let windowView = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
-        if let loadingView = windowView?.viewWithTag(LoadingView.tagValue) as? LoadingView {
+        let loadingView = windowView?.viewWithTag(LoadingView.tagValue) as? LoadingView
+        
+        if let loadingView = loadingView {
             loadingView.isLoading = true
+            
         } else {
             let loadingView = LoadingView(frame: UIScreen.main.bounds)
+            
             windowView?.addSubview(loadingView)
             loadingView.isLoading = true
         }

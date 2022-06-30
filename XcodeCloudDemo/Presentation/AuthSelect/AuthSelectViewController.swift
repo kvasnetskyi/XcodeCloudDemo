@@ -11,7 +11,7 @@ final class AuthSelectViewController: BaseViewController<AuthSelectViewModel> {
     // MARK: - Views
     private let contentView = AuthSelectView()
     
-    // MARK: - Lifecycle
+    // MARK: - Life Cycle
     override func loadView() {
         view = contentView
     }
@@ -19,10 +19,13 @@ final class AuthSelectViewController: BaseViewController<AuthSelectViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bind()
+        setupBinding()
     }
+}
 
-    private func bind() {
+// MARK: - Private Methods
+private extension AuthSelectViewController {
+    func setupBinding() {
         contentView.actionPublisher
             .sink { [unowned self] action in
                 switch action {
@@ -30,6 +33,6 @@ final class AuthSelectViewController: BaseViewController<AuthSelectViewModel> {
                 case .signUp: viewModel.showSignUp()
                 }
             }
-            .store(in: &cancellables)
+            .store(in: &subscriptions)
     }
 }

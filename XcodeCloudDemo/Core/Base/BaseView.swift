@@ -10,5 +10,5 @@ import Combine
 import CombineCocoa
 
 class BaseView: UIView {
-    var cancellables = Set<AnyCancellable>()
+    var subscriptions = Set<AnyCancellable>()
 }

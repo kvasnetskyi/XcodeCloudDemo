@@ -18,36 +18,68 @@ final class AuthSelectView: BaseView {
     private let buttonsStack = UIStackView()
     private let signInButton = UIButton()
     private let signUpButton = UIButton()
-
+    
+    // MARK: - Internal Properties
     private(set) lazy var actionPublisher = actionSubject.eraseToAnyPublisher()
+    
+    // MARK: - Private Properties
     private let actionSubject = PassthroughSubject<AuthSelectViewAction, Never>()
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initialSetup()
+        commonInit()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    private func initialSetup() {
+// MARK: - Private Methods
+extension AuthSelectView {
+    func commonInit() {
         setupLayout()
         setupUI()
-        bindActions()
+        setupBinding()
+    }
+    
+    func setupLayout() {
+        buttonsStack.setup(
+            axis: .vertical,
+            alignment: .fill,
+            distribution: .fillEqually,
+            spacing: Constant.buttonSpacing
+        )
+        
+        buttonsStack.addArranged(signInButton, size: Constant.buttonHeight)
+        buttonsStack.addArranged(signUpButton)
+        
+        let leading = buttonsStack
+            .leadingAnchor
+            .constraint(
+                equalTo: leadingAnchor,
+                constant: Constant.buttonOffset
+            )
+        
+        let trailing = buttonsStack
+            .trailingAnchor
+            .constraint(
+                equalTo: trailingAnchor,
+                constant: -Constant.buttonOffset
+            )
+        
+        let bottom = buttonsStack
+            .bottomAnchor
+            .constraint(
+                equalTo: safeAreaLayoutGuide.bottomAnchor,
+                constant: -Constant.buttonOffset
+            )
+        
+        addSubview(buttonsStack, constraints: [leading, trailing, bottom])
     }
 
-    private func bindActions() {
-        signInButton.tapPublisher
-            .sink { [unowned self] in actionSubject.send(.signIn) }
-            .store(in: &cancellables)
-
-        signUpButton.tapPublisher
-            .sink { [unowned self] in actionSubject.send(.signUp) }
-            .store(in: &cancellables)
-    }
-
-    private func setupUI() {
+    func setupUI() {
         backgroundColor = .white
         signInButton.setTitle(Localization.signIn, for: .normal)
         signUpButton.setTitle(Localization.signUp, for: .normal)
@@ -58,29 +90,26 @@ final class AuthSelectView: BaseView {
             $0.rounded(12)
         }
     }
+    
+    func setupBinding() {
+        signInButton.tapPublisher
+            .sink { [unowned self] in actionSubject.send(.signIn) }
+            .store(in: &subscriptions)
 
-    private func setupLayout() {
-        buttonsStack.setup(axis: .vertical, alignment: .fill, distribution: .fillEqually, spacing: Constant.buttonSpacing)
-
-        buttonsStack.addArranged(signInButton, size: Constant.buttonHeight)
-        buttonsStack.addArranged(signUpButton)
-
-        addSubview(buttonsStack, constraints: [
-            buttonsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constant.buttonOffset),
-            buttonsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constant.buttonOffset),
-            buttonsStack.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -Constant.buttonOffset)
-        ])
+        signUpButton.tapPublisher
+            .sink { [unowned self] in actionSubject.send(.signUp) }
+            .store(in: &subscriptions)
     }
 }
 
-// MARK: - View constants
+// MARK: - Static Properties
 private enum Constant {
     static let buttonOffset: CGFloat = 20
     static let buttonSpacing: CGFloat = 16
     static let buttonHeight: CGFloat = 50
 }
 
-
+// MARK: - PreviewProvider
 import SwiftUI
 struct AuthSelectViewPreview: PreviewProvider {
     static var previews: some View {

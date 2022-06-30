@@ -1,16 +1,11 @@
 //
-//  AppConfiguration.swift
+//  AppConfigurationImpl.swift
 //  XcodeCloudDemo
 //
-//  Created by Artem Kvasnetcky on 24.05.2022.
+//  Created by Artem Kvasnetskyi on 15.06.2022.
 //
 
 import Foundation
-
-protocol AppConfiguration {
-    var bundleId: String { get }
-    var environment: AppEnvironment { get }
-}
 
 final class AppConfigurationImpl: AppConfiguration {
     let bundleId: String

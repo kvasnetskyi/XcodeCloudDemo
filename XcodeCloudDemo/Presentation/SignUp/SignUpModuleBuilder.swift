@@ -16,7 +16,8 @@ final class SignUpModuleBuilder {
     class func build(container: AppContainer) -> Module<SignUpTransition, UIViewController> {
         let viewModel = SignUpViewModel(
             authService: container.authService,
-            userService: container.userService
+            userService: container.userService,
+            validator: container.validator
         )
         
         let viewController = SignUpViewController(viewModel: viewModel)

@@ -11,18 +11,23 @@ final class SignUpViewController: BaseViewController<SignUpViewModel> {
     // MARK: - Views
     private let contentView = SignUpView()
     
-    // MARK: - Lifecycle
+    // MARK: - Life Cycle
     override func loadView() {
         view = contentView
     }
 
     override func viewDidLoad() {
-        setupBindings()
+        setupBinding()
+        
         super.viewDidLoad()
+        
         title = Localization.signUp.uppercased()
     }
+}
 
-    private func setupBindings() {
+// MARK: - Private Methods
+private extension SignUpViewController {
+    func setupBinding() {
         contentView.actionPublisher
             .sink { [unowned self] action in
                 switch action {
@@ -39,12 +44,12 @@ final class SignUpViewController: BaseViewController<SignUpViewModel> {
                     viewModel.signUpUser()
                 }
             }
-            .store(in: &cancellables)
+            .store(in: &subscriptions)
 
         viewModel.$isInputValid
             .sink { [unowned self] isValid in
                 contentView.setDoneButton(enabled: isValid)
             }
-            .store(in: &cancellables)
+            .store(in: &subscriptions)
     }
 }

@@ -9,34 +9,24 @@ import UIKit
 import Combine
 
 final class HomeCoordinator: Coordinator {
+    // MARK: - Internal Properties
     var childCoordinators: [Coordinator] = []
-    
     var navigationController: UINavigationController
+    
     private(set) lazy var didFinishPublisher = didFinishSubject.eraseToAnyPublisher()
+    
+    // MARK: - Private Properties
     private let didFinishSubject = PassthroughSubject<Void, Never>()
     private let container: AppContainer
-    private var cancellables = Set<AnyCancellable>()
-
+    
+    // MARK: - Init
     init(navigationController: UINavigationController, container: AppContainer) {
         self.navigationController = navigationController
         self.container = container
     }
 
     func start() {
-        homeRoot()
-    }
-
-    private func homeRoot() {
-        let module = HomeModuleBuilder.build(container: container)
-        module.transitionPublisher
-            .sink { [unowned self] transition in
-                switch transition {
-                case .screen1: debugPrint("perform transition 1")
-                case .screen2: debugPrint("perform transition 2")
-                case .screen3: debugPrint("perform transition 3")
-                }
-            }
-            .store(in: &cancellables)
-        setRoot(module.viewController)
+        let viewController = HomeModuleBuilder.build(container: container)
+        setRoot(viewController)
     }
 }

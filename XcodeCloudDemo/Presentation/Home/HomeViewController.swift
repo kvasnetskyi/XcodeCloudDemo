@@ -11,22 +11,25 @@ final class HomeViewController: BaseViewController<HomeViewModel> {
     // MARK: - Views
     private let contentView = HomeView()
 
-    // MARK: - Lifecycle
+    // MARK: - Life Cycle
     override func loadView() {
         view = contentView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBindings()
+        setupBinding()
         title = Localization.home.uppercased()
     }
+}
 
-    private func setupBindings() {
+// MARK: - Private Methods
+extension HomeViewController {
+    func setupBinding() {
         viewModel.$characters
             .sink { [unowned self] characters in
                 contentView.show(characters: characters)
             }
-            .store(in: &cancellables)
+            .store(in: &subscriptions)
     }
 }

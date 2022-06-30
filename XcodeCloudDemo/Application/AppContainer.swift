@@ -15,6 +15,7 @@ protocol AppContainer: AnyObject {
     var authService: AuthService { get }
     var tokenService: TokenService { get }
     var characterService: CharactersService { get }
+    var validator: Validator { get }
 }
 
 final class AppContainerImpl: AppContainer {
@@ -24,6 +25,7 @@ final class AppContainerImpl: AppContainer {
     public var authService: AuthService { resolve() }
     public var tokenService: TokenService { resolve() }
     public var characterService: CharactersService { resolve() }
+    public var validator: Validator { resolve() }
     
     // MARK: - Private Properties
     /// Swinject class represents a dependency injection container, which stores registrations of services and retrieves registered services with dependencies injected.
@@ -59,6 +61,7 @@ private extension AppContainerImpl {
         registerTokenService()
         registerAuthService()
         registerCharactersService()
+        registerValidator()
     }
     
     /// A lightweight method that return a specific service from the Swinject container.
@@ -169,6 +172,12 @@ private extension AppContainerImpl {
             )
             
             return CharactersServiceImpl(provider)
+        }
+    }
+    
+    func registerValidator() {
+        container.register(Validator.self) { _ in
+            Validator()
         }
     }
 }

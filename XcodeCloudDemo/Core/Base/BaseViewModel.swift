@@ -10,7 +10,7 @@ import Combine
 protocol ViewModel {
     var isLoadingPublisher: AnyPublisher<Bool, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
-
+    
     func onViewDidLoad()
     func onViewWillAppear()
     func onViewDidAppear()
@@ -19,13 +19,12 @@ protocol ViewModel {
 }
 
 class BaseViewModel: ViewModel {
-    var cancellables = Set<AnyCancellable>()
-
     private(set) lazy var isLoadingPublisher = isLoadingSubject.eraseToAnyPublisher()
-    let isLoadingSubject = PassthroughSubject<Bool, Never>()
-
     private(set) lazy var errorPublisher = errorSubject.eraseToAnyPublisher()
+    
+    let isLoadingSubject = PassthroughSubject<Bool, Never>()
     let errorSubject = PassthroughSubject<Error, Never>()
+    var subscriptions = Set<AnyCancellable>()
     
     deinit {
         debugPrint("deinit of ", String(describing: self))

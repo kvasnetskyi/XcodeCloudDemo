@@ -22,52 +22,68 @@ final class SignUpView: BaseView {
     private let passwordTextField = UITextField()
     private let confirmPasswordTextField = UITextField()
     private let doneButton = UIButton()
-
+    
+    // MARK: - Internal Properties
     private(set) lazy var actionPublisher = actionSubject.eraseToAnyPublisher()
+    
+    // MARK: - Private Properties
     private let actionSubject = PassthroughSubject<SignUpViewAction, Never>()
 
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initialSetup()
+        commonInit()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    private func initialSetup() {
-        setupLayout()
-        setupUI()
-        bindActions()
-    }
-
+// MARK: - Internal Methods
+extension SignUpView {
     func setDoneButton(enabled: Bool) {
         doneButton.isEnabled = enabled
         doneButton.alpha = enabled ? 1 : 0.5
     }
+}
 
-    private func bindActions() {
-        emailTextField.textPublisher
-            .replaceNil(with: "")
-            .sink { [unowned self] in actionSubject.send(.emailChanged($0)) }
-            .store(in: &cancellables)
-
-        passwordTextField.textPublisher
-            .replaceNil(with: "")
-            .sink { [unowned self] in actionSubject.send(.passwordChanged($0)) }
-            .store(in: &cancellables)
-
-        confirmPasswordTextField.textPublisher
-            .replaceNil(with: "")
-            .sink { [unowned self] in actionSubject.send(.confirmPasswordChanged($0)) }
-            .store(in: &cancellables)
-
-        doneButton.tapPublisher
-            .sink { [unowned self] in actionSubject.send(.doneTapped) }
-            .store(in: &cancellables)
+// MARK: - Private Methods
+private extension SignUpView {
+    func commonInit() {
+        setupLayout()
+        setupUI()
+        setupBinding()
     }
+    
+    func setupLayout() {
+        let stack = UIStackView()
+        stack.setup(
+            axis: .vertical,
+            alignment: .fill,
+            distribution: .fill,
+            spacing: Constant.textFieldSpacing
+        )
+        
+        stack.addArranged(emailTextField, size: Constant.textFieldHeight)
+        stack.addArranged(passwordTextField, size: Constant.textFieldHeight)
+        stack.addArranged(confirmPasswordTextField, size: Constant.textFieldHeight)
+        stack.addSpacer(Constant.textFieldSpacing)
+        stack.addArranged(doneButton, size: Constant.doneButtonHeight)
 
-    private func setupUI() {
+        addSubview(
+            scrollView,
+            withEdgeInsets: .zero,
+            safeArea: true,
+            bottomToKeyboard: true
+        )
+        
+        scrollView.contentView.addSubview(
+            stack, withEdgeInsets: .all(Constant.containerSpacing)
+        )
+    }
+    
+    func setupUI() {
         backgroundColor = .white
         emailTextField.placeholder = Localization.email
         passwordTextField.placeholder = Localization.password
@@ -82,21 +98,29 @@ final class SignUpView: BaseView {
         doneButton.rounded(12)
     }
 
-    private func setupLayout() {
-        let stack = UIStackView()
-        stack.setup(axis: .vertical, alignment: .fill, distribution: .fill, spacing: Constant.textFieldSpacing)
-        stack.addArranged(emailTextField, size: Constant.textFieldHeight)
-        stack.addArranged(passwordTextField, size: Constant.textFieldHeight)
-        stack.addArranged(confirmPasswordTextField, size: Constant.textFieldHeight)
-        stack.addSpacer(Constant.textFieldSpacing)
-        stack.addArranged(doneButton, size: Constant.doneButtonHeight)
+    func setupBinding() {
+        emailTextField.textPublisher
+            .replaceNil(with: .empty)
+            .sink { [unowned self] in actionSubject.send(.emailChanged($0)) }
+            .store(in: &subscriptions)
 
-        addSubview(scrollView, withEdgeInsets: .zero, safeArea: true, bottomToKeyboard: true)
-        scrollView.contentView.addSubview(stack, withEdgeInsets: .all(Constant.containerSpacing))
+        passwordTextField.textPublisher
+            .replaceNil(with: .empty)
+            .sink { [unowned self] in actionSubject.send(.passwordChanged($0)) }
+            .store(in: &subscriptions)
+
+        confirmPasswordTextField.textPublisher
+            .replaceNil(with: .empty)
+            .sink { [unowned self] in actionSubject.send(.confirmPasswordChanged($0)) }
+            .store(in: &subscriptions)
+
+        doneButton.tapPublisher
+            .sink { [unowned self] in actionSubject.send(.doneTapped) }
+            .store(in: &subscriptions)
     }
 }
 
-// MARK: - View constants
+// MARK: - Static Properties
 private enum Constant {
     static let textFieldHeight: CGFloat = 50
     static let doneButtonHeight: CGFloat = 50

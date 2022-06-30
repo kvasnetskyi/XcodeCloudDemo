@@ -9,50 +9,65 @@ import UIKit
 import Combine
 
 final class AppCoordinator: Coordinator {
-
-    var window: UIWindow
+    // MARK: - Internal Properties
     var navigationController: UINavigationController
-    let container: AppContainer
-    
-    private(set) lazy var didFinishPublisher = didFinishSubject.eraseToAnyPublisher()
-    private let didFinishSubject = PassthroughSubject<Void, Never>()
     var childCoordinators: [Coordinator] = []
     
+    private(set) lazy var didFinishPublisher = didFinishSubject.eraseToAnyPublisher()
+    
+    // MARK: - Private Properties
+    private var window: UIWindow
+    private let container: AppContainer
+    private let didFinishSubject = PassthroughSubject<Void, Never>()
     private var cancellables = Set<AnyCancellable>()
-
-    init(window: UIWindow, container: AppContainer, navigationController: UINavigationController = UINavigationController()) {
+    
+    // MARK: - Init
+    init(
+        window: UIWindow,
+        container: AppContainer,
+        navigationController: UINavigationController = .init()
+    ) {
         self.window = window
         self.container = container
         self.navigationController = navigationController
     }
-
+    
     func start() {
         self.window.rootViewController = navigationController
         self.window.makeKeyAndVisible()
         
         container.userService.isAuthorized ? mainFlow() : authFlow()
     }
+}
 
-    private func authFlow() {
-        let authCoordinator = AuthCoordinator(navigationController: navigationController,
-                                              container: container)
+// MARK: - Private Methods
+private extension AppCoordinator {
+    func authFlow() {
+        let authCoordinator = AuthCoordinator(
+            navigationController: navigationController,
+            container: container
+        )
+        
         childCoordinators.append(authCoordinator)
+        
         authCoordinator.didFinishPublisher
             .sink { [unowned self] in
                 mainFlow()
                 removeChild(coordinator: authCoordinator)
             }
             .store(in: &cancellables)
+        
         authCoordinator.start()
     }
 
-    private func mainFlow() {
+    func mainFlow() {
         let homeCoordinator = HomeCoordinator(
             navigationController: navigationController,
             container: container
         )
         
         childCoordinators.append(homeCoordinator)
+        
         homeCoordinator.didFinishPublisher
             .sink { [unowned self] in
                 authFlow()

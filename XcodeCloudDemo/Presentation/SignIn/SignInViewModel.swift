@@ -9,45 +9,42 @@ import Foundation
 import Combine
 
 final class SignInViewModel: BaseViewModel {
+    // MARK: - Internal Properties
+    @Published var email: String = .empty
+    @Published var password: String = .empty
+    @Published private(set) var isInputValid: Bool = false
+    
     private(set) lazy var transitionPublisher = transitionSubject.eraseToAnyPublisher()
+    
+    // MARK: - Private Properties
     private let transitionSubject = PassthroughSubject<SignInTransition, Never>()
-
+    
     private let authService: AuthService
     private let userService: UserService
+    private let validator: Validator
 
-    @Published var email: String = ""
-    @Published var password: String = ""
-
-    @Published var isEmailValid: Bool = false
-    @Published var isPasswordValid: Bool = false
-
-    @Published private(set) var isInputValid: Bool = false
-
-    init(authService: AuthService,
-         userService: UserService) {
+    // MARK: - Init
+    init(
+        authService: AuthService,
+        userService: UserService,
+        validator: Validator
+    ) {
         self.authService = authService
         self.userService = userService
+        self.validator = validator
         
         super.init()
     }
-
+    
     override func onViewDidLoad() {
-        $email
-            .map { $0.count > 5 }
-            .sink { [unowned self] in isEmailValid = $0 }
-            .store(in: &cancellables)
-
-        $password
-            .map { $0.count > 5 }
-            .sink { [unowned self] in isPasswordValid = $0 }
-            .store(in: &cancellables)
-
-        $isEmailValid.combineLatest($isPasswordValid)
-            .map { $0 && $1 }
-            .sink { [unowned self] in isInputValid = $0 }
-            .store(in: &cancellables)
+        super.onViewDidLoad()
+        
+        binding()
     }
+}
 
+// MARK: - Inernal Methods
+extension SignInViewModel {
     func signInUser() {
         let model = UserAuthRequestModel(email: email, password: password)
         isLoadingSubject.send(true)
@@ -67,6 +64,21 @@ final class SignInViewModel: BaseViewModel {
                 self?.userService.save(response)
                 self?.transitionSubject.send(.success)
             }
-            .store(in: &cancellables)
+            .store(in: &subscriptions)
+    }
+}
+
+// MARK: - Private Methods
+private extension SignInViewModel {
+    func binding() {
+        $email.combineLatest($password)
+            .map { [unowned self] email, password -> Bool in
+                let isEmailValid = validator.isValidEmail(email)
+                let isPasswordValid = validator.isValidPassword(password)
+                
+                return isEmailValid && isPasswordValid
+            }
+            .sink { [unowned self] in isInputValid = $0 }
+            .store(in: &subscriptions)
     }
 }

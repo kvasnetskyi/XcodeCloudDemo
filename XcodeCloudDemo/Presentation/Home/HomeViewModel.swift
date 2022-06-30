@@ -10,13 +10,13 @@ import Foundation
 import CombineNetworking
 
 final class HomeViewModel: BaseViewModel {
-    private(set) lazy var transitionPublisher = transitionSubject.eraseToAnyPublisher()
-    private let transitionSubject = PassthroughSubject<HomeTransition, Never>()
-
+    // MARK: - Internal Properties
+    @Published var characters: [CharacterModel] = []
+    
+    // MARK: - Private Properties
     private let charactersService: CharactersService
     
-    @Published var characters: [CharacterModel] = []
-
+    // MARK: - Init
     init(charactersService: CharactersService) {
         self.charactersService = charactersService
         super.init()
@@ -24,6 +24,14 @@ final class HomeViewModel: BaseViewModel {
 
     override func onViewDidAppear() {
         super.onViewDidAppear()
+        binding()
+    }
+}
+
+// MARK: - Private Methods
+extension HomeViewModel {
+    func binding() {
+        isLoadingSubject.send(true)
         
         charactersService.getCharacters()
             .receive(on: DispatchQueue.main)
@@ -39,6 +47,6 @@ final class HomeViewModel: BaseViewModel {
             } receiveValue: { [weak self] response in
                 self?.characters = response
             }
-            .store(in: &cancellables)
+            .store(in: &subscriptions)
     }
 }
