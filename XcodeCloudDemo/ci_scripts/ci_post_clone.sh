@@ -4,7 +4,7 @@
 #  XcodeCloudDemo
 #
 #  Created by Artem Kvasnetskyi on 08.06.2022.
-#  
+#
 
 # Install CocoaPods using Homebrew.
 brew install cocoapods
