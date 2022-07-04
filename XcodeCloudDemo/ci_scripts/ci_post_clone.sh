@@ -13,7 +13,7 @@ brew install cocoapods
 pod install
 
 # Set app icon to project
-if [[ -n $CI_XCODE_BUILD_ACTION = 'archive' ]];
+if [[ -n $CI_XCODEBUILD_ACTION = 'archive' ]];
 then
     echo "Setting App Icon"
     APP_ICON_PATH=$CI_WORKSPACE/Resources/Assets.xcassets/AppIcon.appiconset
