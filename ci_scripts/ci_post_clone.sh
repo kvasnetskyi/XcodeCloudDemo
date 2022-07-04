@@ -6,12 +6,6 @@
 #  Created by Artem Kvasnetskyi on 08.06.2022.
 #
 
-# Install CocoaPods using Homebrew.
-# brew install --cask cocoapods
-
-# Install dependencies you manage with CocoaPods.
-# pod install
-
 cd ..
  
 echo ">>> SETUP ENVIRONMENT"
