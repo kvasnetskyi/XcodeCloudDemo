@@ -771,8 +771,7 @@
 				CEE73CF9287331A1001E9FC4 /* ci_pre_xcodebuild.sh */,
 				CEE73CE42873229F001E9FC4 /* AppIcon-Dev.appiconset */,
 			);
-			name = ci_scripts;
-			path = XcodeCloudDemo/ci_scripts;
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 		CEDB447E2865AE5C00B802B6 /* SignUp */ = {
