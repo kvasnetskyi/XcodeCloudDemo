@@ -247,6 +247,7 @@
 		CEE73CF62873229F001E9FC4 /* 50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 50.png; sourceTree = "<group>"; };
 		CEE73CF72873229F001E9FC4 /* 144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 144.png; sourceTree = "<group>"; };
 		CEE73CF82873229F001E9FC4 /* 152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 152.png; sourceTree = "<group>"; };
+		CEE73CF9287331A1001E9FC4 /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		CEF18D0A279EA56C0083A38A /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		CEF18D0C279EA7C00083A38A /* CharacterTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTVC.swift; sourceTree = "<group>"; };
 		CEF18D12279EB1170083A38A /* CharactersAPIRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersAPIRequestBuilder.swift; sourceTree = "<group>"; };
@@ -767,6 +768,7 @@
 			isa = PBXGroup;
 			children = (
 				CED9E3FE2850E9BA00DF89B0 /* ci_post_clone.sh */,
+				CEE73CF9287331A1001E9FC4 /* ci_pre_xcodebuild.sh */,
 				CEE73CE42873229F001E9FC4 /* AppIcon.appiconset */,
 			);
 			name = ci_scripts;
