@@ -7,12 +7,12 @@
 #  
 
 # Set app icon to project
-if [[ -n $CI_XCODEBUILD_ACTION = 'archive' ]];
-then
-    echo "Setting App Icon"
-    APP_ICON_PATH=$CI_WORKSPACE/Resources/Assets.xcassets/AppIcon.appiconset
-    
-    rm -rf $APP_ICON_PATH
-    
-    mv "$CI_WORKSPACE/ci_scripts/AppIcon-Dev.appiconset" $APP_ICON_PATH
-fi
+#if [[ -n $CI_XCODEBUILD_ACTION = 'archive' ]];
+#then
+#    echo "Setting App Icon"
+#    APP_ICON_PATH=$CI_WORKSPACE/Resources/Assets.xcassets/AppIcon.appiconset
+#
+#    rm -rf $APP_ICON_PATH
+#
+#    mv "$CI_WORKSPACE/ci_scripts/AppIcon-Dev.appiconset" $APP_ICON_PATH
+#fi
