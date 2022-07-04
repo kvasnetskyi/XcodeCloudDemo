@@ -7,9 +7,7 @@
 #
 
 # Install CocoaPods using Homebrew.
-brew install cocoapods
-
-echo $CI_WORKSPACE
+brew install --cask cocoapods
 
 # Install dependencies you manage with CocoaPods.
 pod install
