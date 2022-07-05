@@ -16,5 +16,5 @@ then
     rm -rf $APP_ICON_PATH
     
     # Add new icon set
-    mv "$CI_WORKSPACE/ci_scripts/AppIcon-Beta.appiconset" $APP_ICON_PATH
+    mv "$CI_WORKSPACE/ci_scripts/Resources/AppIcon.appiconset" $APP_ICON_PATH
 fi
