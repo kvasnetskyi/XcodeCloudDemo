@@ -769,7 +769,7 @@
 			children = (
 				CED9E3FE2850E9BA00DF89B0 /* ci_post_clone.sh */,
 				CEE73CF9287331A1001E9FC4 /* ci_pre_xcodebuild.sh */,
-				CEE73CE42873229F001E9FC4 /* AppIcon-Dev.appiconset */,
+				CEE73CE42873229F001E9FC4 /* AppIcon-Beta.appiconset */,
 			);
 			path = ci_scripts;
 			sourceTree = "<group>";
@@ -782,7 +782,7 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		CEE73CE42873229F001E9FC4 /* AppIcon-Dev.appiconset */ = {
+		CEE73CE42873229F001E9FC4 /* AppIcon-Beta.appiconset */ = {
 			isa = PBXGroup;
 			children = (
 				CEE73CE52873229F001E9FC4 /* 1024.png */,
@@ -806,7 +806,7 @@
 				CEE73CF72873229F001E9FC4 /* 144.png */,
 				CEE73CF82873229F001E9FC4 /* 152.png */,
 			);
-			path = "AppIcon-Dev.appiconset";
+			path = "AppIcon-Beta.appiconset";
 			sourceTree = "<group>";
 		};
 		CEF18D11279EB0F40083A38A /* CharactersService */ = {
