@@ -9,12 +9,19 @@
 # Set app icon to project
 if [[ $CI_XCODEBUILD_ACTION = 'archive' ]];
 then
-    echo "Setting App Icon"
     APP_ICON_PATH=$CI_WORKSHPACE/XcodeCloudDemo/Resources/Assets.xcassets/AppIcon.appiconset
-
-    # Remove existing app icon
-    rm -rf $APP_ICON_PATH
     
-    # Add new icon set
-    mv "$CI_WORKSPACE/ci_scripts/Resources/AppIcon.appiconset" $APP_ICON_PATH
+    if [ -d "$APP_ICON_PATH" ];
+    then
+        echo "Setting App Icon"
+        # Remove existing app icon
+        rm -rf $APP_ICON_PATH
+    
+        # Add new icon set
+        mv "$CI_WORKSPACE/ci_scripts/Resources/AppIcon.appiconset" $APP_ICON_PATH
+        exit 0
+    else
+        echo "Error: ${APP_ICON_PATH} not found. Can not continue."
+        exit 1
+    fi
 fi
