@@ -227,8 +227,6 @@
 		CEC3C2AA279C145C00657BBD /* JSONContentPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONContentPlugin.swift; sourceTree = "<group>"; };
 		CED9E3FE2850E9BA00DF89B0 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		CEDB447F2865AE7D00B802B6 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
-		CEE73CF9287331A1001E9FC4 /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
-		CEE7B34528772C4F007DC42A /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 		CEF18D0A279EA56C0083A38A /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		CEF18D0C279EA7C00083A38A /* CharacterTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTVC.swift; sourceTree = "<group>"; };
 		CEF18D12279EB1170083A38A /* CharactersAPIRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersAPIRequestBuilder.swift; sourceTree = "<group>"; };
@@ -454,7 +452,6 @@
 			children = (
 				CED9E3FD2850E96E00DF89B0 /* ci_scripts */,
 				74E0B67C2725ED760090A21B /* XcodeCloudDemo */,
-				74E0B6922725EDD50090A21B /* Shared */,
 				CE9ACB6B2858B34200E26746 /* XcodeCloudDemoTests */,
 				74E0B67B2725ED760090A21B /* Products */,
 				56D666EE398A48E22E51CC8C /* Pods */,
@@ -478,6 +475,7 @@
 				74A6FADC2753CA4600DC44DF /* BusinessLogic */,
 				74A6FADD2753CA5100DC44DF /* Core */,
 				74A6FADE2753CA5900DC44DF /* Presentation */,
+				74E0B6922725EDD50090A21B /* Resources */,
 			);
 			path = XcodeCloudDemo;
 			sourceTree = "<group>";
@@ -493,7 +491,7 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		74E0B6922725EDD50090A21B /* Shared */ = {
+		74E0B6922725EDD50090A21B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				74B926CC27667AE8005395A0 /* Fonts */,
@@ -503,7 +501,7 @@
 				74B926C727666795005395A0 /* Colors.xcassets */,
 				74B926F427668016005395A0 /* Localizable.strings */,
 			);
-			path = Shared;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		74E0B6942725F2A90090A21B /* LaunchScreen */ = {
@@ -673,14 +671,6 @@
 			path = UserService;
 			sourceTree = "<group>";
 		};
-		CE4B363F287487A000E62AEE /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				CEE7B34528772C4F007DC42A /* AppIcon.appiconset */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		CE6E55662868A40500D7593C /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -757,8 +747,6 @@
 			isa = PBXGroup;
 			children = (
 				CED9E3FE2850E9BA00DF89B0 /* ci_post_clone.sh */,
-				CEE73CF9287331A1001E9FC4 /* ci_pre_xcodebuild.sh */,
-				CE4B363F287487A000E62AEE /* Resources */,
 			);
 			path = ci_scripts;
 			sourceTree = "<group>";
@@ -1164,7 +1152,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63263MV7NR;
-				INFOPLIST_FILE = Shared/Info.plist;
+				INFOPLIST_FILE = XcodeCloudDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1241,7 +1229,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63263MV7NR;
-				INFOPLIST_FILE = Shared/Info.plist;
+				INFOPLIST_FILE = XcodeCloudDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1324,7 +1312,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63263MV7NR;
-				INFOPLIST_FILE = Shared/Info.plist;
+				INFOPLIST_FILE = XcodeCloudDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1401,7 +1389,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63263MV7NR;
-				INFOPLIST_FILE = Shared/Info.plist;
+				INFOPLIST_FILE = XcodeCloudDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1540,7 +1528,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63263MV7NR;
-				INFOPLIST_FILE = Shared/Info.plist;
+				INFOPLIST_FILE = XcodeCloudDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1561,7 +1549,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63263MV7NR;
-				INFOPLIST_FILE = Shared/Info.plist;
+				INFOPLIST_FILE = XcodeCloudDemo/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

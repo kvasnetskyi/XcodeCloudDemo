@@ -1,5 +1,5 @@
-input_dir: Resources
-output_dir: Resources/Generated
+input_dir: XcodeCloudDemo/Resources
+output_dir: XcodeCloudDemo/Resources/Generated
 xcassets:
   - inputs: Assets.xcassets
     outputs:
