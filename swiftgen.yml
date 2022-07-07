@@ -1,5 +1,5 @@
-input_dir: MVVMSkeleton/Resources
-output_dir: MVVMSkeleton/Resources/Generated
+input_dir: Resources
+output_dir: Resources/Generated
 xcassets:
   - inputs: Assets.xcassets
     outputs:
