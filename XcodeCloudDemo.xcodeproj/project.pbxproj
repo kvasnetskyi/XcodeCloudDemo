@@ -99,9 +99,16 @@
 		CE42E04127985D7F00A36D25 /* CombineNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = CE42E04027985D7F00A36D25 /* CombineNetworking */; };
 		CE42E04327985EAC00A36D25 /* TokenServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42E04227985EAC00A36D25 /* TokenServiceImpl.swift */; };
 		CE6E55682868A42800D7593C /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E55672868A42800D7593C /* HomeViewModelTests.swift */; };
-		CE6E556A2868A50400D7593C /* CharactersServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E55692868A50400D7593C /* CharactersServiceStub.swift */; };
+		CE6E556A2868A50400D7593C /* CharactersServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E55692868A50400D7593C /* CharactersServiceMock.swift */; };
 		CE9ACB6D2858B34200E26746 /* AuthSelectViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9ACB6C2858B34200E26746 /* AuthSelectViewModelTests.swift */; };
 		CE9ACB7C2858BA9D00E26746 /* XCTestCase+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9ACB7B2858BA9D00E26746 /* XCTestCase+Publisher.swift */; };
+		CEB309D928795E5200174868 /* SignInViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB309D828795E5200174868 /* SignInViewModelBuilder.swift */; };
+		CEB309DC28796AE600174868 /* ValidatorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB309DB28796AE600174868 /* ValidatorImpl.swift */; };
+		CEB309E328796E8700174868 /* TestDoublesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB309E228796E8700174868 /* TestDoublesFactory.swift */; };
+		CEB309E62879859800174868 /* SignUpViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB309E52879859800174868 /* SignUpViewModelBuilder.swift */; };
+		CEB309EC287987D100174868 /* BaseAuthenticationViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB309EB287987D100174868 /* BaseAuthenticationViewModelBuilder.swift */; };
+		CEB309EF2879AB5400174868 /* HomeViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB309EE2879AB5400174868 /* HomeViewModelBuilder.swift */; };
+		CEB309F12879AF2A00174868 /* BaseViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB309F02879AF2A00174868 /* BaseViewModelBuilder.swift */; };
 		CEC3C2A7279C056A00657BBD /* UserAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2A6279C056A00657BBD /* UserAuthModel.swift */; };
 		CEC3C2A9279C077800657BBD /* UserServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2A8279C077800657BBD /* UserServiceImpl.swift */; };
 		CEC3C2AB279C145C00657BBD /* JSONContentPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2AA279C145C00657BBD /* JSONContentPlugin.swift */; };
@@ -218,10 +225,17 @@
 		CE42E0332798567D00A36D25 /* TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenService.swift; sourceTree = "<group>"; };
 		CE42E04227985EAC00A36D25 /* TokenServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenServiceImpl.swift; sourceTree = "<group>"; };
 		CE6E55672868A42800D7593C /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
-		CE6E55692868A50400D7593C /* CharactersServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersServiceStub.swift; sourceTree = "<group>"; };
+		CE6E55692868A50400D7593C /* CharactersServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersServiceMock.swift; sourceTree = "<group>"; };
 		CE9ACB6A2858B34200E26746 /* XcodeCloudDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeCloudDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9ACB6C2858B34200E26746 /* AuthSelectViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSelectViewModelTests.swift; sourceTree = "<group>"; };
 		CE9ACB7B2858BA9D00E26746 /* XCTestCase+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Publisher.swift"; sourceTree = "<group>"; };
+		CEB309D828795E5200174868 /* SignInViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelBuilder.swift; sourceTree = "<group>"; };
+		CEB309DB28796AE600174868 /* ValidatorImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorImpl.swift; sourceTree = "<group>"; };
+		CEB309E228796E8700174868 /* TestDoublesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDoublesFactory.swift; sourceTree = "<group>"; };
+		CEB309E52879859800174868 /* SignUpViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelBuilder.swift; sourceTree = "<group>"; };
+		CEB309EB287987D100174868 /* BaseAuthenticationViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAuthenticationViewModelBuilder.swift; sourceTree = "<group>"; };
+		CEB309EE2879AB5400174868 /* HomeViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelBuilder.swift; sourceTree = "<group>"; };
+		CEB309F02879AF2A00174868 /* BaseViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelBuilder.swift; sourceTree = "<group>"; };
 		CEC3C2A6279C056A00657BBD /* UserAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthModel.swift; sourceTree = "<group>"; };
 		CEC3C2A8279C077800657BBD /* UserServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceImpl.swift; sourceTree = "<group>"; };
 		CEC3C2AA279C145C00657BBD /* JSONContentPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONContentPlugin.swift; sourceTree = "<group>"; };
@@ -596,7 +610,6 @@
 			isa = PBXGroup;
 			children = (
 				CE3B8BA12859E7BC004BECAD /* AuthServiceStub.swift */,
-				CE6E55692868A50400D7593C /* CharactersServiceStub.swift */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -621,6 +634,7 @@
 			isa = PBXGroup;
 			children = (
 				CE3B8BAD285A08E4004BECAD /* Validator.swift */,
+				CEB309DB28796AE600174868 /* ValidatorImpl.swift */,
 			);
 			path = Validator;
 			sourceTree = "<group>";
@@ -684,6 +698,7 @@
 			children = (
 				CE9ACB772858B43600E26746 /* Cases */,
 				CE9ACB7A2858B45400E26746 /* Test Doubles */,
+				CEB309DD28796DCE00174868 /* Helpers */,
 				CE9ACB782858B43A00E26746 /* Extensions */,
 			);
 			path = XcodeCloudDemoTests;
@@ -708,6 +723,7 @@
 		CE9ACB7A2858B45400E26746 /* Test Doubles */ = {
 			isa = PBXGroup;
 			children = (
+				CEB309DA28796A2F00174868 /* Mockes */,
 				CE3B8BAB285A05BD004BECAD /* Fakes */,
 				CE3B8BA02859E7A8004BECAD /* Stubs */,
 			);
@@ -731,6 +747,59 @@
 				CE9ACB6C2858B34200E26746 /* AuthSelectViewModelTests.swift */,
 			);
 			path = AuthSelect;
+			sourceTree = "<group>";
+		};
+		CEB309DA28796A2F00174868 /* Mockes */ = {
+			isa = PBXGroup;
+			children = (
+				CE6E55692868A50400D7593C /* CharactersServiceMock.swift */,
+			);
+			path = Mockes;
+			sourceTree = "<group>";
+		};
+		CEB309DD28796DCE00174868 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CEB309E42879781500174868 /* Builders */,
+				CEB309E128796E6500174868 /* Factories */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CEB309E128796E6500174868 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				CEB309E228796E8700174868 /* TestDoublesFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		CEB309E42879781500174868 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				CEB309F02879AF2A00174868 /* BaseViewModelBuilder.swift */,
+				CEB309EA287987BC00174868 /* Authentication */,
+				CEB309ED2879AB3200174868 /* Home */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
+		CEB309EA287987BC00174868 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				CEB309EB287987D100174868 /* BaseAuthenticationViewModelBuilder.swift */,
+				CEB309D828795E5200174868 /* SignInViewModelBuilder.swift */,
+				CEB309E52879859800174868 /* SignUpViewModelBuilder.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		CEB309ED2879AB3200174868 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CEB309EE2879AB5400174868 /* HomeViewModelBuilder.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		CEC3C2A5279C055300657BBD /* UserAuthModel */ = {
@@ -1004,6 +1073,7 @@
 				CEF18D13279EB1170083A38A /* CharactersAPIRequestBuilder.swift in Sources */,
 				74B926FC2766808A005395A0 /* Fonts.swift in Sources */,
 				CE42E02F2798555E00A36D25 /* TokenModel.swift in Sources */,
+				CEB309DC28796AE600174868 /* ValidatorImpl.swift in Sources */,
 				74A6FAD02753852C00DC44DF /* AuthCoordinator.swift in Sources */,
 				74E0B67E2725ED760090A21B /* AppDelegate.swift in Sources */,
 				CE42E02B2798545200A36D25 /* NetworkingHandler.swift in Sources */,
@@ -1043,12 +1113,18 @@
 			files = (
 				CE9ACB6D2858B34200E26746 /* AuthSelectViewModelTests.swift in Sources */,
 				CE6E55682868A42800D7593C /* HomeViewModelTests.swift in Sources */,
+				CEB309E62879859800174868 /* SignUpViewModelBuilder.swift in Sources */,
+				CEB309F12879AF2A00174868 /* BaseViewModelBuilder.swift in Sources */,
+				CEB309E328796E8700174868 /* TestDoublesFactory.swift in Sources */,
 				CE3B8BA22859E7BC004BECAD /* AuthServiceStub.swift in Sources */,
 				CEDB44802865AE7D00B802B6 /* SignUpViewModelTests.swift in Sources */,
 				CE3B8B962859E42A004BECAD /* SignInViewModelTests.swift in Sources */,
-				CE6E556A2868A50400D7593C /* CharactersServiceStub.swift in Sources */,
+				CE6E556A2868A50400D7593C /* CharactersServiceMock.swift in Sources */,
+				CEB309D928795E5200174868 /* SignInViewModelBuilder.swift in Sources */,
+				CEB309EC287987D100174868 /* BaseAuthenticationViewModelBuilder.swift in Sources */,
 				CE3B8BAA2859F5E9004BECAD /* UserServiceFake.swift in Sources */,
 				CE9ACB7C2858BA9D00E26746 /* XCTestCase+Publisher.swift in Sources */,
+				CEB309EF2879AB5400174868 /* HomeViewModelBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

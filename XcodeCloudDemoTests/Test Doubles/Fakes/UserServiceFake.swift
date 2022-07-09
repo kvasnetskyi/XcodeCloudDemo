@@ -12,40 +12,29 @@ import Foundation
 final class UserServiceFake: UserService {
     // MARK: - Internal Properties
     var isAuthorized: Bool {
-        self[.token] != nil
+        storage[.token] != nil
     }
     
     var token: String? {
-        self[.token]
+        storage[.token]
     }
     
     var refreshToken: String? {
-        self[.refreshToken]
+        storage[.refreshToken]
     }
     
     // MARK: - Private Properties
-    private let userDefaults = UserDefaults.standard
+    private var storage = [Keys: String]()
     
     // MARK: - Methods
     func save(_ model: UserAuthModel) {
-        self[.token] = model.idToken
-        self[.refreshToken] = model.refreshToken
+        storage[.token] = model.idToken
+        storage[.refreshToken] = model.refreshToken
     }
     
     func clear() {
-        self[.token] = nil
-        self[.refreshToken] = nil
-    }
-}
-
-// MARK: - Private Methods
-private extension UserServiceFake {
-    subscript(key: Keys) -> String? {
-        get {
-            userDefaults.string(forKey: key.rawValue)
-        } set {
-            userDefaults.setValue(newValue, forKey: key.rawValue)
-        }
+        storage[.token] = nil
+        storage[.refreshToken] = nil
     }
 }
 

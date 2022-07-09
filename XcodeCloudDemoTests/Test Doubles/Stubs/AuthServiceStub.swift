@@ -12,41 +12,22 @@ import CombineNetworking
 @testable import XcodeCloudDemo
 
 final class AuthServiceStub {
-    // MARK: - Enum
-    enum Result {
-        case value
-        case error
-        
-        func get() -> AnyPublisher<UserAuthModel, CNError> {
-            switch self {
-            case .value:
-                return Just(UserModel(idToken: .empty, refreshToken: .empty))
-                    .setFailureType(to: CNError.self)
-                    .eraseToAnyPublisher()
-                
-            case .error:
-                return Fail(error: CNError.unspecifiedError)
-                    .eraseToAnyPublisher()
-            }
-        }
-    }
-    
     // MARK: - Properties
-    var result: Result
+    private var output: AnyPublisher<UserAuthModel, CNError>
     
     // MARK: - Init
-    init(return result: Result) {
-        self.result = result
+    init(return output: AnyPublisher<UserAuthModel, CNError>) {
+        self.output = output
     }
 }
 
 // MARK: - AuthService
 extension AuthServiceStub: AuthService {
     func login(_ model: UserAuthRequestModel) -> AnyPublisher<UserAuthModel, CNError> {
-        result.get()
+        output
     }
     
     func registration(_ model: UserAuthRequestModel) -> AnyPublisher<UserAuthModel, CNError> {
-        result.get()
+        output
     }
 }

@@ -12,126 +12,206 @@ import XCTest
 class SignUpViewModelTests: XCTestCase {
     // MARK: - Properties
     var sut: SignUpViewModel!
-    var authServiceStub: AuthServiceStub!
+    var builder: SignUpViewModelBuilder!
     var userServiceFake: UserServiceFake!
-    
+
     // MARK: - Life Cycle
     override func setUp() {
         super.setUp()
         
-        authServiceStub = AuthServiceStub(return: .value)
-        userServiceFake = UserServiceFake()
-        sut = SignUpViewModel(
-            authService: authServiceStub,
-            userService: userServiceFake,
-            validator: Validator()
-        )
-        
-        sut.onViewDidLoad()
+        builder = SignUpViewModelBuilder()
     }
-    
+
     override func tearDown() {
+        builder = nil
         sut = nil
-        authServiceStub = nil
-        userServiceFake.clear()
+        userServiceFake?.clear()
         userServiceFake = nil
         
         super.tearDown()
     }
-    
-    // MARK: - Test Methods
-    func testSignUpViewModel_whenEmailAndPasswordsAreValid_inputValid() throws {
-        let publisher = sut.$isInputValid.collect(4)
-        let isValidInputValues = try awaitPublisher(publisher, withAct: {
-            sut.email = "email@email.com"
-            sut.password = "12345aA!"
-            sut.confirmPassword = sut.password
-        })
-        
-        let isValidInput = try XCTUnwrap(isValidInputValues.last)
-        XCTAssertTrue(isValidInput)
-    }
-    
-    func testSignUpViewModel_whenEmailNotValid_inputNotValid() throws {
-        let publisher = sut.$isInputValid.collect(4)
-        let isValidInputValues = try awaitPublisher(publisher, withAct: {
-            sut.email = "email.com"
-            sut.password = "12345aA!"
-            sut.confirmPassword = sut.password
-        })
+}
 
-        let isValidInput = try XCTUnwrap(isValidInputValues.last)
-        XCTAssertFalse(isValidInput)
+// MARK: - Test Methods
+extension SignUpViewModelTests {
+    func testSignUpViewModel_whenEmailAndPasswordsAreValid_inputValid() throws {
+        // Arrange & Act
+        sut = builder
+            .with(viewState: .onViewDidLoad)
+            .makeEmailValid()
+            .makePasswordValid()
+            .makeConfirmPasswordValid()
+            .build()
+        
+        // Assert
+        try inputNeedToBeValid(true)
     }
-    
+
+    func testSignUpViewModel_whenEmailNotValid_inputNotValid() throws {
+        // Arrange & Act
+        sut = builder
+            .with(viewState: .onViewDidLoad)
+            .makeEmailNotValid()
+            .makePasswordValid()
+            .makeConfirmPasswordValid()
+            .build()
+        
+        // Assert
+        try inputNeedToBeValid(false)
+    }
+
     func testSignUpViewModel_whenPasswordsNotValid_inputNotValid() throws {
-        let publisher = sut.$isInputValid.collect(4)
-        let isValidInputValues = try awaitPublisher(publisher, withAct: {
-            sut.email = "email@email.com"
-            sut.password = "12345aA"
-            sut.confirmPassword = sut.password
-        })
+        // Arrange & Act
+        sut = builder
+            .with(viewState: .onViewDidLoad)
+            .makeEmailValid()
+            .makePasswordNotValid()
+            .makeConfirmPasswordNotValid()
+            .build()
         
-        let isValidInput = try XCTUnwrap(isValidInputValues.last)
-        XCTAssertFalse(isValidInput)
+        // Assert
+        try inputNeedToBeValid(false)
     }
-    
+
     func testSignUpViewModel_whenPasswordsNotEqual_inputNotValid() throws {
-        let publisher = sut.$isInputValid.collect(4)
-        let isValidInputValues = try awaitPublisher(publisher, withAct: {
-            sut.email = "email@email.com"
-            sut.password = "12345aA!"
-            sut.confirmPassword = "12345aA!!"
-        })
+        // Arrange & Act
+        sut = builder
+            .with(viewState: .onViewDidLoad)
+            .makeEmailValid()
+            .makePasswordValid()
+            .makeConfirmPasswordNotEqualToPassword()
+            .build()
         
-        let isValidInput = try XCTUnwrap(isValidInputValues.last)
-        XCTAssertFalse(isValidInput)
+        // Assert
+        try inputNeedToBeValid(false)
     }
-    
+
     func testSignUpViewModel_whenSignUpUser_isLoadingPublisherSendTrue() throws {
-        sut.email = "email@email.com"
-        sut.password = "12345aA!"
-        sut.confirmPassword = sut.password
+        // Arrange
+        sut = builder
+            .with(viewState: .onViewDidLoad)
+            .makeEmailValid()
+            .makePasswordValid()
+            .makeConfirmPasswordValid()
+            .build()
         
+        // Act
         let isLoading = try awaitPublisher(
             sut.isLoadingPublisher, withAct: sut.signUpUser
         )
         
+        // Assert
         XCTAssertTrue(isLoading)
     }
-    
+
     func testSignUpViewModel_whenSignUpUserFinished_isLoadingPublisherSendFalse() throws {
-        sut.email = "email@email.com"
-        sut.password = "12345aA!"
-        sut.confirmPassword = sut.password
+        sut = builder
+            .with(viewState: .onViewDidLoad)
+            .makeEmailValid()
+            .makePasswordValid()
+            .makeConfirmPasswordValid()
+            .build()
         
+        let publisher = sut
+            .isLoadingPublisher
+            .collect(2)
+        
+        // Act
         let isLoadingValues = try awaitPublisher(
-            sut.isLoadingPublisher.collect(2), withAct: sut.signUpUser
+            publisher, withAct: sut.signUpUser
         )
         
+        // Assert
         let isLoading = try XCTUnwrap(isLoadingValues.last)
         XCTAssertFalse(isLoading)
     }
-    
+
     func testSignUpViewModel_whenSignUpUserFinishedWithError_errorPublisherSendError() throws {
-        sut.email = "email@email.com"
-        sut.password = "12345aA!"
-        sut.confirmPassword = sut.password
-        authServiceStub.result = .error
+        // Arrange
+        sut = builder
+            .with(viewState: .onViewDidLoad)
+            .makeEmailValid()
+            .makePasswordValid()
+            .makeConfirmPasswordValid()
+            .makeAuthServiceOutputFailure()
+            .build()
         
+        // Act & Assert
         let _ = try awaitPublisher(
             sut.errorPublisher, withAct: sut.signUpUser
         )
     }
-
-    func testSignUpViewModel_whenSignUpUserFinished_userDataSavedAndTransitionChanged() throws {
-        sut.email = "email@email.com"
-        sut.password = "12345aA!"
-        sut.confirmPassword = sut.password
+    
+    func testSignUpViewModel_whenSignUpUserFinished_transitionChanged() throws {
+        // Arrange
+        sut = builder
+            .with(viewState: .onViewDidLoad)
+            .makeEmailValid()
+            .makePasswordValid()
+            .makeConfirmPasswordValid()
+            .build()
         
-        let transition = try awaitPublisher(sut.transitionPublisher, withAct: sut.signUpUser)
+        // Act
+        let transition = try awaitPublisher(
+            sut.transitionPublisher, withAct: sut.signUpUser
+        )
+        
+        // Assert
         XCTAssertEqual(transition, .success)
+    }
+    
+    func testSignUpViewModel_whenSignUpUserFinished_userDataSaved() throws {
+        // Arrange
+        userServiceFake = TestDoublesFactory.getUserServiceFake()
+        
+        sut = builder
+            .with(userService: userServiceFake)
+            .with(viewState: .onViewDidLoad)
+            .makeEmailValid()
+            .makePasswordValid()
+            .makeConfirmPasswordValid()
+            .build()
+        
+        // Act
+        let _ = try awaitPublisher(
+            sut.transitionPublisher, withAct: sut.signUpUser
+        )
+        
+        // Assert
         XCTAssertNotNil(userServiceFake.token)
         XCTAssertNotNil(userServiceFake.refreshToken)
+    }
+}
+
+// MARK: - Private Methods
+private extension SignUpViewModelTests {
+    func inputNeedToBeValid(
+        _ valid: Bool,
+        _ file: StaticString = #file,
+        _ line: UInt = #line
+    ) throws {
+        let isValidInput = try awaitPublisher(
+            sut.$isInputValid,
+            file: file,
+            line: line
+        )
+        
+        guard valid else {
+            XCTAssertFalse(
+                isValidInput,
+                "Input is valid",
+                file: file,
+                line: line
+            )
+            
+            return
+        }
+        
+        XCTAssertTrue(
+            isValidInput,
+            "Input is not valid",
+            file: file,
+            line: line
+        )
     }
 }

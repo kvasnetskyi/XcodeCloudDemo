@@ -177,7 +177,7 @@ private extension AppContainerImpl {
     
     func registerValidator() {
         container.register(Validator.self) { _ in
-            Validator()
+            ValidatorImpl()
         }
     }
 }
