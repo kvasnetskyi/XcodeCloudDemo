@@ -24,8 +24,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        print("Debug: Test")
-        
         self.window = UIWindow(windowScene: windowScene)
         self.appContainer = AppContainerImpl()
         self.appCoordinator = AppCoordinator(
