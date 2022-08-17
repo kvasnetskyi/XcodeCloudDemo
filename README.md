@@ -378,20 +378,24 @@ Xcode Cloud sends an HTTP request to a given endpoint every time it **creates, s
 # Disconnecting the project from Xcode Cloud
 Disconnecting Xcode Cloud from the project takes place in three steps:
 1. **Deleting data from Xcode Cloud**
+
 In Xcode Navigator, go to Report, right-click on your app, and select Delete Xcode Cloud Data. After that, go to App Store Connect to the app you want, select Settings and click Delete Xcode Cloud Data. 
 
 *These apps will no longer be available immediately and will be removed from the Apple system within 30 days.*
 
 2. **Disconnecting Xcode Cloud from the repository:**
 - Bitbucket Server, GitHub Enterprise, or self-managed GitLab:
+
 Go to App Store Connect under Users and Access, select Xcode Cloud tab, hover over the SCM provider, click Remove.
 
 - Bitbucket, GitHub, or GitLab:
+
 Go to App Store Connect under Users and Access, select Xcode Cloud tab, select Integrations in the sidebar, click Unlink next to the SCM provider. 
 
 Then you need to disable the Personal Access Tokens or Apps that allowed Xcode Cloud access to the repository. Disabling depends on the SCM provider. For more detailed [instructions](https://developer.apple.com/documentation/xcode/removing-your-project-from-xcode-cloud).
 
 3. **Disconnect Xcode Cloud from Slack** *(optional)*
+
 Open Slack workspace in the Slack app and select Settings & administration > Manage apps. Select "Apps" in the sidebar, then select the Xcode Cloud app. Click "Remove App".
 
 Developed By
