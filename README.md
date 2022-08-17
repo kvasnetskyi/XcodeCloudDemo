@@ -41,6 +41,7 @@ To work with Xcode Cloud you need to meet some requirements.
 - Automatic code signing must be used.
 
 **Version control system requirements**
+
 Xcode Cloud requires the code to be in a Git repository. In addition, you will need a specific permission or role to connect Xcode Cloud to your repository. It supports the following source control providers:
 - Bitbucket Cloud and Bitbucket Server – requires the administrator role to connect.
 - GitHub and GitHub Enterprise – requires the organization owner or administrator role (if the organization is not used).
@@ -55,12 +56,15 @@ To connect, you need:
 2. **Go to the Report navigation tab.**
 
 3. **Select the Cloud tab.**
+
 The functionality is currently in beta, so you will be redirected to the website where you need to apply for testing. If you are already approved, you can move on with a next step.
 
 4. **Select a product.**
+
 When you start setting up a project to use Xcode Cloud, Xcode analyses it to determine the project's settings and lists its applications and platforms, called products. You can be a member of multiple development teams, in which case Xcode asks you to select a team. After selecting a product, Xcode proposes the first workflow for the product.
 
 5. **Configure the first workflow.**
+
 When setting up Xcode Cloud, the first workflow includes:
 - Build for each change or pull request associated with the default branch.
 - Using the latest version of macOS and Xcode for a temporary environment.
@@ -70,6 +74,7 @@ When setting up Xcode Cloud, the first workflow includes:
 *You can edit the first workflow if you need.*
 
 6. **Setting up a repository**
+
 Xcode Cloud requires access to a Git repository with the project. It uses this access to automatically create and test code when changes are made.
 
 You will need to go through the authorization process at your GIT provider's website. 
@@ -96,6 +101,7 @@ Here you specify the main information of your workflow:
 - **Description.**
 
 - **Ability to limit the people who can edit the workflow.**
+
 If this checkbox is selected, only the Admin or App Managers of an Apple Development account can make changes to the workflow.
 
 ## Environment
@@ -103,9 +109,11 @@ This is where you specify information about the temporary build environment:
 - **The versions of Xcode and macOS temporary enviroment.**
 
 - **Disable/enable caching.**
+
 Xcode Cloud saves the cache during build to save time for the next build. If necessary, you can select Clean to remove this cache, but it has a big impact on build time.
 
 - **Custom Environment Variables**
+
 You can specify custom enviroment variables, which you can later use in your custom scripts.
 
 
@@ -113,15 +121,19 @@ You can specify custom enviroment variables, which you can later use in your cus
 Determine when Xcode Cloud starts a workflow.
 
 - **Branch Changes**
+
 Any, a specific, or several specific branches have been changed. 
 
 - **Pull Request Changes**
+
 A PR has been created or changed.
 
 - **Tag Changes**
+
 A Git tag was created or changed. 
 
 - **On a Schedule for a Branch**
+
 A pre-set time has elapsed.
 
 For all conditions except "On a Schedule" you can select "Monitor or Ignore Specific Files and Folders", which can help you ignore, or alternatively, pay attention to changes if they affect:
@@ -173,21 +185,27 @@ When Xcode Cloud performs the archive action, it accesses your code and runs the
 
 When archiving, you will need to select the destination of your archive. Possible options:
 - **None**
+
 Use this option if you are not setting up a workflow to distribute the application.
 
 - **TestFlight (Internal Testing Only)**
+
 The exported application archive is suitable for distribution to internal testers and developers using TestFlight.
 
 - **TestFlight and App Store**
+
 The exported application archive is suitable for distribution to external testers using TestFlight and for release to the App Store.
 
 ## Post Actions
+
 Actions that take place after building.
 
 - **Setting up custom notifications**
+
 Xcode Cloud can send notifications to email or Slack when a build succeeds or fails.
 
 - **Publish to TestFlight**
+
 Xcode Cloud can distribute a new version of the application in TestFlight for both internal and external testers.
 
 ## Custom build scripts
@@ -203,12 +221,15 @@ These are your custom shell scripts with which you can extend the functionality 
 ### Custom build scripts overview
 Xcode Cloud recognises three different types of scripts:
 1. **post-clone script**
+
 Runs after Xcode Cloud clone Git repository.
 
 2. **pre-xcodebuild script**
+
 Runs before Xcode Cloud run `xcodebuild` command.
 
 3. **post-xcodebuild script**
+
 Runs after Xcode Cloud run `xcodebuild` command.
 
 **Important:**
@@ -244,7 +265,7 @@ then
 fi
 ```
 
-The list of prepared variables can be seen at [link].(https://developer.apple.com/documentation/xcode/environment-variable-reference)
+The list of prepared variables can be seen at [link](https://developer.apple.com/documentation/xcode/environment-variable-reference).
 
 ### Debug information
 The logs from your script appear in the build report's build logs, which can be useful for debugging. But it's worth remembering that **confidential information shouldn't be logged unless it's a secret custom environment variable**. In the case of secret custom environment variables Xcode Cloud replaces it with sprocket characters in the build logs.
